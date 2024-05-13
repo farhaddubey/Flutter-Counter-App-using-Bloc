@@ -1,3 +1,4 @@
+import 'package:counter_app/bloc/counter_bloc.dart';
 import 'package:counter_app/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final counter = counterCubit.state; No need to use that while using BlocBuilder
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
+    // final counterBloc = BlocProvider.of<CounterBloc>(context);
+    // As mulitblocprovider is used in main class they can be removed hence commented
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -25,10 +28,10 @@ class MyHomePage extends StatelessWidget {
                 const Text(
                   'You have pushed the button this many times:',
                 ),
-              BlocBuilder<CounterCubit, int>(
+              BlocBuilder<CounterBloc, int>(
           // Here we've to provide <> CounterCubit args to tell that the bloc is CounterCubit & int to tell that tha args is int type
           // also takes a bloc:  as it's argument ',
-              bloc: counterCubit,
+          //     bloc: counterBloc, We no need to declare it as we're using MultiBlocProvider
               builder: (context, counter) {
           // While using BlocBuilder as soon as the counterCubit is changed the Entire under builder is rebuilt
               return Text(

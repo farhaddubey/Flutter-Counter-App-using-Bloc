@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:counter_app/cubit/counter_cubit.dart';
+
+import 'bloc/counter_bloc.dart';
 class IncDecPage extends StatelessWidget {
   const IncDecPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -14,7 +17,8 @@ class IncDecPage extends StatelessWidget {
           FloatingActionButton(
             // onPressed: ()=>counterCubit.increment(),
             onPressed: () {
-              counterCubit.increment();
+              counterBloc.add(CounterIncremented());
+              // counterCubit.increment();
               // setState(() {});
               // What if we don not want ot use set state
               // That's we have to shift towards using BlocBuilder'
@@ -25,7 +29,8 @@ class IncDecPage extends StatelessWidget {
           FloatingActionButton(
             // onPressed: ()=>counterCubit.increment(),
             onPressed: () {
-              counterCubit.decrement();
+              counterBloc.add(CounterDecremented());
+              // counterCubit.decrement();
               // setState(() {});
               // What if we don not want ot use set state
               // That's we have to shift towards using BlocBuilder'
